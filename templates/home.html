@@ -1,18 +1,71 @@
+<style>
+    body {
+        background-color: #101010;
+    }
+
+    div{
+        max-width: 500px;
+        margin: auto;
+        text-align: center;
+        color: white;
+        font-size: xx-large
+    }
+
+    #right_message{
+        color: green;
+    }
+
+    #wrong_message{
+        color: red;
+    }
+
+    #new_message{
+        color: yellow;
+    }
+
+    #tries_left{
+        color: blue;
+    }
+
+    #guess_pokemon{
+        font-size: x-large;
+    }
+
+    #guess_button{
+        font-size: x-large;
+    }
+</style>
+
+<script type="text/javascript">
+function FocusOnInput()
+{
+     document.getElementById("guess_button").focus();
+}
+</script>
+
+
 {% extends 'base.html' %}
 
 {% block title %}Who's That Pokémon?{% endblock %}
 
 {% block guess_the_pokemon %}
     {%  if right_pokemon %}
-        <div>Nice job! Here's another Pokémon!</div>
+        <div id="right_message">Nice job, here's another Pokémon!</div>
     {%  endif %}
     {%  if wrong_pokemon %}
-        <div>That's not right, try again!</div>
+        <div id="wrong_message">Aww that's not it, try again! </div>
     {%  endif %}
-    <img src={{ image }} alt="MysteryPokémon">
-    <form method="POST" action="{{ url_for('guess_that_pokemon') }}">
-		<label for="pokemon"></label><input type="search" id="guess_pokemon" name="guess_pokemon">
-        <input type="submit" value="Guess!">
-	</form>
-</form>
+    {%  if new_pokemon %}
+        <div id="new_message">That was a tough one, let's try another Pokémon!</div>
+    {%  endif %}
+    <div onload="FocusOnInput()">
+        <img src={{ image }} alt="MysteryPokémon" id="mystery-pokemon">
+    </div>
+    <div id="tries_left">You have {{ guess_count }} tries left</div>
+    <div>
+        <form method="POST" action="{{ url_for('guess_that_pokemon') }}">
+            <label for="pokemon"></label><input type="search" id="guess_pokemon" name="guess_pokemon">
+            <input type="submit" value="Guess!" id="guess_button">
+        </form>
+    </div>
 {% endblock %}

@@ -40,12 +40,22 @@ def get_image_path(pokemon_index):
 
 @app.route('/', methods=['GET'])
 def whos_that_pokemon(**kwargs):
-    pokemon = get_random_pokemon()
-    if pokemon:
-        session['pokemon_name'] = pokemon.name
-        session['pokemon_index'] = pokemon.index
+    if not session.get('pokemon_name') and not session.get('pokemon_index'):
+        while True:
+            pokemon = get_random_pokemon()
+            if pokemon:
+                session['pokemon_name'] = pokemon.name
+                session['pokemon_index'] = pokemon.index
+                session['guess_count'] = 5
+                break
         return render_template('home.html', pokemon=session['pokemon_name'],
                                image=get_image_path(session['pokemon_index']),
+                               guess_count=session['guess_count'],
+                               **kwargs)
+    else:
+        return render_template('home.html', pokemon=session['pokemon_name'],
+                               image=get_image_path(session['pokemon_index']),
+                               guess_count=session['guess_count'],
                                **kwargs)
 
 
@@ -53,7 +63,17 @@ def whos_that_pokemon(**kwargs):
 def guess_that_pokemon():
     pokemon_guess = request.form['guess_pokemon']
     if pokemon_guess.title() == session['pokemon_name']:
+        session['pokemon_name'] = None
+        session['pokemon_index'] = None
         return whos_that_pokemon(right_pokemon=True)
-    return render_template('home.html', pokemon=session['pokemon_name'],
-                           image=get_image_path(session['pokemon_index']),
-                           wrong_pokemon=True)
+    else:
+        session['guess_count'] -= 1
+    if session['guess_count'] > 0:
+        return render_template('home.html', pokemon=session['pokemon_name'],
+                               image=get_image_path(session['pokemon_index']),
+                               wrong_pokemon=True,
+                               guess_count=session['guess_count'])
+    else:
+        session['pokemon_name'] = None
+        session['pokemon_index'] = None
+        return whos_that_pokemon(new_pokemon=True)
