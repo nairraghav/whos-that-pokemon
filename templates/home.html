@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Who's That Pokémon?{% endblock %}
+
+{% block guess_the_pokemon %}
+    {%  if right_pokemon %}
+        <div>Nice job! Here's another Pokémon!</div>
+    {%  endif %}
+    {%  if wrong_pokemon %}
+        <div>That's not right, try again!</div>
+    {%  endif %}
+    <img src={{ image }} alt="MysteryPokémon">
+    <form method="POST" action="{{ url_for('guess_that_pokemon') }}">
+		<label for="pokemon"></label><input type="search" id="guess_pokemon" name="guess_pokemon">
+        <input type="submit" value="Guess!">
+	</form>
+</form>
+{% endblock %}
