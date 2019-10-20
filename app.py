@@ -3,8 +3,12 @@ from config import app
 import database
 from models.pokemon import Pokemon
 import random
+import os
 
-app.secret_key = b'\xb6x(\xd67\x1f\xa7\x15\x92\xf1VqU\xe9|\xbcqu\xac\xf6\x16\xa8\x8f\xe5'
+app.secret_key = os.getenv('POKEMON_SECRET_KEY')
+
+
+# TODO: determine how to filter generations
 
 unseen_pokemon = [i+1 for i in range(808)]
 
@@ -46,7 +50,7 @@ def whos_that_pokemon(**kwargs):
             if pokemon:
                 session['pokemon_name'] = pokemon.name
                 session['pokemon_index'] = pokemon.index
-                session['guess_count'] = 5
+                session['guess_count'] = 3
                 break
         return render_template('home.html', pokemon=session['pokemon_name'],
                                image=get_image_path(session['pokemon_index']),
