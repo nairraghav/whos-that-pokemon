@@ -5,7 +5,7 @@ from models.pokemon import Pokemon
 import random
 import os
 
-app.secret_key = os.getenv('POKEMON_SECRET_KEY')
+app.secret_key = os.getenv('SECURE_KEY')
 
 
 # TODO: determine how to filter generations
