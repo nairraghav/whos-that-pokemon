@@ -6,4 +6,4 @@ install:
 # run linting and tests
 script:
   - make lint
-  - make pytest
+  - make test
