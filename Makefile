@@ -1,6 +1,9 @@
 IMAGE_NAME=whos_that_pokemon
 TAG=latest
 
+clean:
+	rm -rf .pytest_cache/ .coverage
+
 docker-build:
 	docker build -t $(IMAGE_NAME):$(TAG) .
 

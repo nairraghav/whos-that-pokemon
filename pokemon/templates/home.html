@@ -36,14 +36,6 @@
     }
 </style>
 
-<script type="text/javascript">
-function FocusOnInput()
-{
-     document.getElementById("guess_button").focus();
-}
-</script>
-
-
 {% extends 'base.html' %}
 
 {% block title %}Who's That Pokémon?{% endblock %}
@@ -58,13 +50,13 @@ function FocusOnInput()
     {%  if new_pokemon %}
         <div id="new_message">That was a tough one, let's try another Pokémon!</div>
     {%  endif %}
-    <div onload="FocusOnInput()">
+    <div>
         <img src={{ image }} alt="MysteryPokémon" id="mystery-pokemon">
     </div>
     <div id="tries_left">You have {{ guess_count }} tries left</div>
     <div>
         <form method="POST" action="{{ url_for('guess_that_pokemon') }}">
-            <label for="pokemon"></label><input type="search" id="guess_pokemon" name="guess_pokemon">
+            <input type="search" id="guess_pokemon" name="guess_pokemon" autofocus>
             <input type="submit" value="Guess!" id="guess_button">
         </form>
     </div>
