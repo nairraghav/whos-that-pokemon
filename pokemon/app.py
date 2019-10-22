@@ -10,7 +10,7 @@ app.secret_key = os.getenv('SECURE_KEY')
 
 # TODO: determine how to filter generations
 
-unseen_pokemon = [i+1 for i in range(808)]
+UNSEEN_POKEMON = [i + 1 for i in range(808)]
 
 
 @app.cli.command('init_db')
@@ -29,9 +29,9 @@ def drop_db():
 
 
 def get_random_pokemon():
-    if len(unseen_pokemon) != 0:
-        pokemon_index = random.choice(unseen_pokemon)
-        unseen_pokemon.remove(pokemon_index)
+    if len(UNSEEN_POKEMON) != 0:
+        pokemon_index = random.choice(UNSEEN_POKEMON)
+        UNSEEN_POKEMON.remove(pokemon_index)
         pokemon = Pokemon.query.filter(Pokemon.index == pokemon_index).first()
         return pokemon
     return None
