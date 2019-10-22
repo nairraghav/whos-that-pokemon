@@ -17,4 +17,4 @@ test:
 	python -m pytest tests/ --cov=pokemon/
 
 lint:
-	python -m pylint pokemon/
+	flake8 pokemon/ tests/
