@@ -1,5 +1,5 @@
-from config import db
-from models.pokemon import Pokemon
+from pokemon.config import db
+from pokemon.models.pokemon_model import Pokemon
 import requests
 from bs4 import BeautifulSoup
 

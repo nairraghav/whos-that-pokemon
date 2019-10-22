@@ -4,7 +4,7 @@ from flask_marshmallow import Marshmallow
 
 import os
 
-app = Flask("whos-that-pokemon")
+app = Flask("pokemon")
 db = SQLAlchemy(app)
 marsh = Marshmallow(app)
 

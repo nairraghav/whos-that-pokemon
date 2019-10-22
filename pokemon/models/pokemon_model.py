@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String
-from config import db, marsh
+from pokemon.config import db, marsh
 
 
 class Pokemon(db.Model):

@@ -1,7 +1,7 @@
 from flask import render_template, request, session
-from config import app
-import database
-from models.pokemon import Pokemon
+from pokemon.config import app
+from pokemon import database
+from pokemon.models.pokemon_model import Pokemon
 import random
 import os
 
