@@ -1,12 +1,13 @@
+"""Handles the configuration of the tools used: App, Database, Marshmallow"""
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 
-import os
 
-app = Flask("pokemon")
-db = SQLAlchemy(app)
-marsh = Marshmallow(app)
+APP = Flask("pokemon")
+DB = SQLAlchemy(APP)
+MARSH = Marshmallow(APP)
 
-base_dir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(base_dir, 'pokemon.db')
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+APP.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASE_DIR, 'pokemon.db')

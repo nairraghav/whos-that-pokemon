@@ -1,1 +1,15 @@
 from pokemon import app
+
+
+def test_get_random_pokemon_returns_none():
+    app.UNSEEN_POKEMON = []
+    assert not app.get_random_pokemon()
+
+
+def test_get_random_pokemon():
+    app.UNSEEN_POKEMON = [475]
+    assert app.get_random_pokemon().name == "Gallade"
+
+
+def test_get_image_path():
+    assert app.get_image_path(5) == "static/img/005.png"
