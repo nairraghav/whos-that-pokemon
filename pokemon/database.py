@@ -15,10 +15,12 @@ def drop_db():  # pragma: no cover
     DB.drop_all()
 
 
+# TODO: Gather images again but abstract the url
+#       Put the path in the DB
 def seed_db():  # pragma: no cover
     """Seeds the database with the correct mapping of each pokemons index and
     other information"""
-    for index in range(808):
+    for index in range(809):
         pokemon_url = f"https://www.pokemon.com/us/pokedex/{index + 1}"
         request = requests.get(pokemon_url)
         soup = BeautifulSoup(request.content, features='lxml')

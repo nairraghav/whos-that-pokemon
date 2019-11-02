@@ -11,32 +11,8 @@
         font-size: xx-large
     }
 
-    #right_message{
-        color: green;
-    }
-
-    #wrong_message{
-        color: red;
-    }
-
-    #new_message{
-        color: yellow;
-    }
-
-    #tries_left{
-        color: blue;
-    }
-
-    #guess_pokemon{
-        font-size: x-large;
-    }
-
-    #generations_button{
+    #reset_button{
         font-size: medium;
-    }
-
-    #guess_button{
-        font-size: x-large;
     }
 
     .generation-checkbox{
@@ -51,15 +27,6 @@
 {% block title %}Who's That Pokémon?{% endblock %}
 
 {% block guess_the_pokemon %}
-    {%  if right_pokemon %}
-        <div id="right_message">Nice job, here's another Pokémon!</div>
-    {%  endif %}
-    {%  if wrong_pokemon %}
-        <div id="wrong_message">Aww that's not it, try again! </div>
-    {%  endif %}
-    {%  if new_pokemon %}
-        <div id="new_message">That was a tough one, let's try another Pokémon!</div>
-    {%  endif %}
     <form method="POST" action="{{ url_for('set_pokemon_generation') }}">
         <input class="generation-checkbox" type="checkbox" name="generation" value="1" {{'checked="checked"' if 1 in generations else ""}}>Generation 1<br>
         <input class="generation-checkbox" type="checkbox" name="generation" value="2" {{'checked="checked"' if 2 in generations else ""}}>Generation 2<br>
@@ -70,16 +37,11 @@
         <input class="generation-checkbox" type="checkbox" name="generation" value="7" {{'checked="checked"' if 7 in generations else ""}}>Generation 7<br>
         <input type="submit" value="Set Generations" id="generations_button">
     </form>
-
     <div>
-        <img src={{ image }} alt="MysteryPokémon" id="mystery-pokemon">
+        Wow, you finished all the pokemon for the selected generation(s), nice job!
     </div>
+    <form method="POST" action="{{ url_for('reset_game') }}">
+        <input type="submit" value="Reset Game?" id="reset_button">
+    </form>
 
-    <div id="tries_left">You have {{ guess_count }} tries left</div>
-    <div>
-        <form method="POST" action="{{ url_for('guess_that_pokemon') }}">
-            <input type="search" id="guess_pokemon" name="guess_pokemon" autofocus>
-            <input type="submit" value="Guess!" id="guess_button">
-        </form>
-    </div>
 {% endblock %}
