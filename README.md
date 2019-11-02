@@ -7,3 +7,5 @@ The goal of this repository is to help understand how to create a fully function
 
 This website is deployed using Heroku [here](https://whispering-cove-17469.herokuapp.com/)
 
+# Developer Notes
+Setting Environment Variable: heroku config:set SECURE_KEY=<secret-key>
