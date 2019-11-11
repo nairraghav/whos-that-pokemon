@@ -53,6 +53,7 @@ def get_random_pokemon():
     list. We, then, return the Pokemon associated with that index. Returns
     None if no pokemon left"""
     generation = random.choice(session['generations'])
+    print(UNSEEN_POKEMON)
     if len(UNSEEN_POKEMON[generation]) != 0:
         pokemon_index = random.choice(UNSEEN_POKEMON[generation])
         UNSEEN_POKEMON[generation].remove(pokemon_index)
@@ -162,6 +163,15 @@ def reset_game():  # pragma: no cover
 def get_new_pokemon(**kwargs):
     """This helper method is used to reset session data so that we pick a new
     pokemon from our list"""
+    if session.get('pokemon_index'):
+        remove_pokemon_from_unseen_list(session['pokemon_index'])
     session['pokemon_name'] = None
     session['pokemon_index'] = None
     return whos_that_pokemon(**kwargs)
+
+
+def remove_pokemon_from_unseen_list(pokemon_index):
+    for _, pokemon_list in UNSEEN_POKEMON.items():
+        if pokemon_index in pokemon_list:
+            pokemon_list.remove(pokemon_index)
+            return
