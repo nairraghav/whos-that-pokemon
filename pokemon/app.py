@@ -53,7 +53,6 @@ def get_random_pokemon():
     list. We, then, return the Pokemon associated with that index. Returns
     None if no pokemon left"""
     generation = random.choice(session['generations'])
-    print(UNSEEN_POKEMON)
     if len(UNSEEN_POKEMON[generation]) != 0:
         pokemon_index = random.choice(UNSEEN_POKEMON[generation])
         UNSEEN_POKEMON[generation].remove(pokemon_index)
