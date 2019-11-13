@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-#make lint
+make lint
 
-#make test
+make test
 
 # export flask app to run flask
 export FLASK_APP=pokemon/app.py

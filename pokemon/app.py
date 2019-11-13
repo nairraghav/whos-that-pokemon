@@ -77,6 +77,8 @@ def whos_that_pokemon(**kwargs):  # pragma: no cover
     finally rendering the page"""
     if not session.get('generations'):
         session['generations'] = [i for i in range(1, 8)]
+    if not session.get('score'):
+        session['score'] = 0
     if not session.get('pokemon_name') and not session.get('pokemon_index'):
         while True:
             pokemon = get_random_pokemon()
@@ -92,12 +94,14 @@ def whos_that_pokemon(**kwargs):  # pragma: no cover
                                image=get_image_path(session['pokemon_index']),
                                generations=session['generations'],
                                guess_count=session['guess_count'],
+                               score=session['score'],
                                **kwargs)
     else:
         return render_template('home.html', pokemon=session['pokemon_name'],
                                image=get_image_path(session['pokemon_index']),
                                generations=session['generations'],
                                guess_count=session['guess_count'],
+                               score=session['score'],
                                **kwargs)
 
 
@@ -114,7 +118,8 @@ def guess_that_pokemon():  # pragma: no cover
 
     # check to see if the guess is correct
     if pokemon_guess.lower() == session['pokemon_name'].lower():
-        # if correct, find a new pokemon
+        # if correct, bump up score and find a new pokemon
+        session['score'] += 1
         return get_new_pokemon(right_pokemon=True)
     else:
         # if wrong, reduce count
@@ -128,10 +133,12 @@ def guess_that_pokemon():  # pragma: no cover
                                image=get_image_path(session['pokemon_index']),
                                generations=session['generations'],
                                wrong_pokemon=True,
-                               guess_count=session['guess_count'])
+                               guess_count=session['guess_count'],
+                               score=session['score'])
     else:
         # if out of guesses, get new pokemon
-        return get_new_pokemon(new_pokemon=True, )
+        session['score'] = 0
+        return get_new_pokemon(new_pokemon=True)
 
 
 @APP.route('/gen', methods=['POST'])
@@ -155,6 +162,7 @@ def reset_game():  # pragma: no cover
     session['pokemon_name'] = None
     session['pokemon_index'] = None
     session['guess_count'] = None
+    session['score'] = 0
     session['generations'] = [i for i in range(1, 8)]
     return whos_that_pokemon()
 

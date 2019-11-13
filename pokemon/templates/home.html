@@ -8,7 +8,7 @@
         margin: auto;
         text-align: center;
         color: white;
-        font-size: xx-large
+        font-size: x-large
     }
 
     #right_message{
@@ -28,25 +28,29 @@
     }
 
     #guess_pokemon{
-        font-size: x-large;
+        font-size: large;
     }
 
     #generations_button{
-        font-size: medium;
+        font-size: small;
     }
 
     #guess_button{
-        font-size: x-large;
+        font-size: large;
     }
 
     .generation-checkbox{
-        font-size: medium;
+        font-size: small;
         vertical-align: center;
         horiz-align: left;
     }
 
     label{
         color: white;
+    }
+
+    #score{
+        horiz-align: left;
     }
 </style>
 
@@ -55,15 +59,7 @@
 {% block title %}Who's That Pokémon?{% endblock %}
 
 {% block guess_the_pokemon %}
-    {%  if right_pokemon %}
-        <div id="right_message">Nice job, here's another Pokémon!</div>
-    {%  endif %}
-    {%  if wrong_pokemon %}
-        <div id="wrong_message">Aww that's not it, try again! </div>
-    {%  endif %}
-    {%  if new_pokemon %}
-        <div id="new_message">That was a tough one, let's try another Pokémon!</div>
-    {%  endif %}
+    <div id="score">Score: {{ score }}</div>
     <form method="POST" action="{{ url_for('set_pokemon_generation') }}">
         <input class="generation-checkbox" id="generation-1" type="checkbox" name="generation" value="1" {{'checked="checked"' if 1 in generations else ""}}><label for="generation-1">Generation 1</label><br>
         <input class="generation-checkbox" id="generation-2" type="checkbox" name="generation" value="2" {{'checked="checked"' if 2 in generations else ""}}><label for="generation-2">Generation 2</label><br>
@@ -74,7 +70,6 @@
         <input class="generation-checkbox" id="generation-7" type="checkbox" name="generation" value="7" {{'checked="checked"' if 7 in generations else ""}}><label for="generation-7">Generation 7</label><br>
         <input type="submit" value="Set Generations" id="generations_button">
     </form>
-
     <div>
         <img src={{ image }} alt="MysteryPokémon" id="mystery-pokemon">
     </div>
@@ -86,4 +81,13 @@
             <input type="submit" value="Guess!" id="guess_button">
         </form>
     </div>
+    {%  if right_pokemon %}
+        <div id="right_message">Nice job, here's another Pokémon!</div>
+    {%  endif %}
+    {%  if wrong_pokemon %}
+        <div id="wrong_message">Aww that's not it, try again! </div>
+    {%  endif %}
+    {%  if new_pokemon %}
+        <div id="new_message">That was a tough one, let's try another Pokémon!</div>
+    {%  endif %}
 {% endblock %}
