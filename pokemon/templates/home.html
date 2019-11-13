@@ -44,6 +44,10 @@
         vertical-align: center;
         horiz-align: left;
     }
+
+    label{
+        color: white;
+    }
 </style>
 
 {% extends 'base.html' %}
@@ -61,13 +65,13 @@
         <div id="new_message">That was a tough one, let's try another Pokémon!</div>
     {%  endif %}
     <form method="POST" action="{{ url_for('set_pokemon_generation') }}">
-        <input class="generation-checkbox" type="checkbox" name="generation" value="1" {{'checked="checked"' if 1 in generations else ""}}>Generation 1<br>
-        <input class="generation-checkbox" type="checkbox" name="generation" value="2" {{'checked="checked"' if 2 in generations else ""}}>Generation 2<br>
-        <input class="generation-checkbox" type="checkbox" name="generation" value="3" {{'checked="checked"' if 3 in generations else ""}}>Generation 3<br>
-        <input class="generation-checkbox" type="checkbox" name="generation" value="4" {{'checked="checked"' if 4 in generations else ""}}>Generation 4<br>
-        <input class="generation-checkbox" type="checkbox" name="generation" value="5" {{'checked="checked"' if 5 in generations else ""}}>Generation 5<br>
-        <input class="generation-checkbox" type="checkbox" name="generation" value="6" {{'checked="checked"' if 6 in generations else ""}}>Generation 6<br>
-        <input class="generation-checkbox" type="checkbox" name="generation" value="7" {{'checked="checked"' if 7 in generations else ""}}>Generation 7<br>
+        <input class="generation-checkbox" id="generation-1" type="checkbox" name="generation" value="1" {{'checked="checked"' if 1 in generations else ""}}><label for="generation-1">Generation 1</label><br>
+        <input class="generation-checkbox" id="generation-2" type="checkbox" name="generation" value="2" {{'checked="checked"' if 2 in generations else ""}}><label for="generation-2">Generation 2</label><br>
+        <input class="generation-checkbox" id="generation-3" type="checkbox" name="generation" value="3" {{'checked="checked"' if 3 in generations else ""}}><label for="generation-3">Generation 3</label><br>
+        <input class="generation-checkbox" id="generation-4" type="checkbox" name="generation" value="4" {{'checked="checked"' if 4 in generations else ""}}><label for="generation-4">Generation 4</label><br>
+        <input class="generation-checkbox" id="generation-5" type="checkbox" name="generation" value="5" {{'checked="checked"' if 5 in generations else ""}}><label for="generation-5">Generation 5</label><br>
+        <input class="generation-checkbox" id="generation-6" type="checkbox" name="generation" value="6" {{'checked="checked"' if 6 in generations else ""}}><label for="generation-6">Generation 6</label><br>
+        <input class="generation-checkbox" id="generation-7" type="checkbox" name="generation" value="7" {{'checked="checked"' if 7 in generations else ""}}><label for="generation-7">Generation 7</label><br>
         <input type="submit" value="Set Generations" id="generations_button">
     </form>
 
