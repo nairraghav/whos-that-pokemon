@@ -23,4 +23,4 @@ lint:
 	flake8 pokemon/ tests/
 
 format:
-	black pokemon
+	black pokemon --line-length 79
