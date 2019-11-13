@@ -23,11 +23,10 @@ def seed_db():  # pragma: no cover
     for index in range(809):
         pokemon_url = f"https://www.pokemon.com/us/pokedex/{index + 1}"
         request = requests.get(pokemon_url)
-        soup = BeautifulSoup(request.content, features='lxml')
+        soup = BeautifulSoup(request.content, features="lxml")
 
-        title = soup.find('div',
-                          attrs={'class': 'pokedex-pokemon-pagination-title'})
-        pokemon_name = title.find('div').text.split('#')[0].strip()
-        pokemon = Pokemon(index=index+1, name=pokemon_name)
+        title = soup.find("div", attrs={"class": "pokedex-pokemon-pagination-title"})
+        pokemon_name = title.find("div").text.split("#")[0].strip()
+        pokemon = Pokemon(index=index + 1, name=pokemon_name)
         DB.session.add(pokemon)
     DB.session.commit()

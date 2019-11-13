@@ -7,7 +7,7 @@ clean:
 docker-build:
 	docker build -t $(IMAGE_NAME):$(TAG) .
 
-docker-tag:
+docker-tag: docker-build
 	docker tag whos_that_pokemon $(IMAGE_NAME):$(TAG)
 
 docker-run:
@@ -21,3 +21,6 @@ test:
 
 lint:
 	flake8 pokemon/ tests/
+
+format:
+	black pokemon
