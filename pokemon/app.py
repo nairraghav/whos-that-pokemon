@@ -24,6 +24,7 @@ def set_unknown_pokemon():
         5: [i for i in range(494, 650)],
         6: [i for i in range(650, 722)],
         7: [i for i in range(722, 810)],
+        8: [i for i in range(810, 891)],
     }
 
 
@@ -79,6 +80,7 @@ def whos_that_pokemon(**kwargs):  # pragma: no cover
         session["generations"] = [i for i in range(1, 8)]
     if not session.get("score"):
         session["score"] = 0
+
     if not session.get("pokemon_name") and not session.get("pokemon_index"):
         while True:
             pokemon = get_random_pokemon()
