@@ -6,7 +6,6 @@ from pokemon.config import APP
 from pokemon import database
 from pokemon.models.pokemon_model import Pokemon
 
-
 APP.secret_key = os.getenv("SECURE_KEY")
 
 
@@ -85,7 +84,7 @@ def whos_that_pokemon(**kwargs):  # pragma: no cover
         while True:
             pokemon = get_random_pokemon()
             if pokemon:
-                session["pokemon_name"] = pokemon.name
+                session["pokemon_name"] = pokemon.name.lower()
                 session["pokemon_index"] = pokemon.index
                 session["guess_count"] = 3
                 break
@@ -125,7 +124,7 @@ def guess_that_pokemon():  # pragma: no cover
     pokemon_guess = request.form["guess_pokemon"]
 
     # check to see if the guess is correct
-    if pokemon_guess.lower() == session["pokemon_name"].lower():
+    if pokemon_guess.lower().trim() == session["pokemon_name"]:
         # if correct, bump up score and find a new pokemon
         session["score"] += 1
         return get_new_pokemon(right_pokemon=True)
