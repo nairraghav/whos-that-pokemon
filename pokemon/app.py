@@ -124,7 +124,7 @@ def guess_that_pokemon():  # pragma: no cover
     pokemon_guess = request.form["guess_pokemon"]
 
     # check to see if the guess is correct
-    if pokemon_guess.lower().trim() == session["pokemon_name"]:
+    if pokemon_guess.lower().strip() == session["pokemon_name"]:
         # if correct, bump up score and find a new pokemon
         session["score"] += 1
         return get_new_pokemon(right_pokemon=True)
