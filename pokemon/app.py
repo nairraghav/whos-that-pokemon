@@ -76,7 +76,7 @@ def whos_that_pokemon(**kwargs):  # pragma: no cover
     data. If not, we get a new pokemon and set it's data in the session,
     finally rendering the page"""
     if not session.get("generations"):
-        session["generations"] = [i for i in range(1, 8)]
+        session["generations"] = [i for i in range(1, 9)]
     if not session.get("score"):
         session["score"] = 0
 
